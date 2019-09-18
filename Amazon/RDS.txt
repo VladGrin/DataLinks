@@ -1,0 +1,6 @@
+RDS - Relation Database
+
+Public or Private Endpoint 	- URL базы данных с/без интернет доступа
+Read Replica			- создаёт дополнительный интерфейс только для чтения
+Backup Snapshots Automatic
+Backup Snapshots Manua

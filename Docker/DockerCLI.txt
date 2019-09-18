@@ -1,0 +1,157 @@
+docker info
+docker version
+docker images
+docker ps -a
+docker ps -al
+
+docker pull tomcat
+docker run -p 4000:8080 tomcat
+ 
+docker stop <containerId> 
+docker rm <containerId>
+docker rmi <imageId>
+docker build --tag=<name> . 
+docker login -u <login> -p <poassword>
+docker tag <name> vladgrin/<namerepo:v.1>
+docker push vladgrin/<namerepo:v.1>
+
+		Amazon
+
+sudo yum install docker -y whatever
+sudo service docker start
+sudo docker pull vladgrin/<namerepo:v.1>
+sudo docker run -p 80:8080 <namerepo:v.1>
+
+
+Install Docker on Ubuntu 18.04
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+sudo apt update
+sudo apt install apt-transport-https
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce
+sudo systemctl status docker
+sudo usermod -aG docker $USER
+>>>logout/login<<<
+```
+
+docker run hello-world
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+docker ps
+docker ps -a
+docker images
+
+docker search tomcat
+docker pull tomcat
+docker run -it -p 1234:8080 tomcat
+docker run -it -p 8888:80 nginx
+docker run -d -p 8888:80 nginx
+
+docker build -t denis .
+docker images
+
+docker run -it  -p 1234:80  denis:latest
+docker run -d -p  1234:80  denis:latest
+
+docker  ps     # list containers
+docker  ps -a  # list all containers
+
+docker tag denis_ubuntu denis_ubuntu-PROD
+docker tag denis_ubuntu denis_ubuntu-PROD:v2
+
+docker rm   # delete container
+docker rmi  # delete image
+
+UPDATE IMAGE
+~~~~~~~~~~~~~
+docker run -d -p 7777:80 denis_ubuntu4
+docker exec -it 5267e21d140 /bin/bash
+echo "V2" >> /var/www/html/index.html
+exit
+docker commit 5267e21d140 denis_v2:latest
+
+Export/Import Docker Image to file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+docker save image:tag > arch_name.tar
+docker load -i arch_name.tar
+
+Import/Export Docker Image to AWS ECR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+docker build -t denis:v1 .
+aws ecr get-login --no-include-email --region=ca-central-1 
+docker tag  denis:v1  12345678.dkr.ecr.ca-central-1.amazonaws.com/myrepo:latest
+docker push 12345678.dkr.ecr.ca-central-1.amazonaws.com/myrepo:lastest
+
+docker pull 12345678.dkr.ecr.ca-central-1.amazonaws.com/myrepo:latest
+
+Kill and Delete Containers and Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+docker rm -f $(docker ps -aq)        # Delete all Containers
+docker rmi -f $(docker images -q)    # Delete all Images
+
+
+#---------------------------------------------------------------------------
+# Команда Docker					Что делает, что выдаёт
+#---------------------------------------------------------------------------
+
+docker -v						Версия Docker Engine
+docker ps						Список Бегущих контейнеров
+docket ps -a						Список ВСЕХ контейнеров
+docker images						Список локальных Images 
+	
+docker search tomcat					Найти Image tomcat в DockerHub
+docker pull tomcat					Скачать Image tomcat из DockerHub
+docker run -it -p 7777:8080 tomcat			Запустить интерактивно контейнер  tomcat на порте 7777
+docker run -d -p 8888:8080 tomcat			Запустить НЕинтерактивно контейнер  tomcat на порте 8888
+docker run -d -p 80:80 nginx				Запустить НЕинтерактивно контейнер  nginx на порте 80
+	
+docker tag oldname:v1  newname:v2			Создать копию Image с другим именем и тагом
+	
+docker build -t myimage:latest .			Создать Image с именем myimage:latest из локального Dockerfile
+docker run -d myimage:latest				Запустить НЕинтерактивно контейнер myimage:latest
+	
+docker rm 1234567890					Удалить контейнер с ID 1234567890
+docker rmi 1112227778					Удалит локальный Image с ID 1112227778
+	
+docker exec -it 5267e21d140 /bin/bash			Запустить интерактивно /bin/bash на контейнере с ID 5267e21d140
+echo "New Version v2" >> /var/www/html/index.html	Изменить файл в контейнере
+exit							Выйти из контейнера
+docker commit 5267e21d140  newimage_v2:latest		Создать Image с именем newimage_v2:latest из контейнера с ID 5267e21d140
+
+
+#---------------------------------------------------------------------------
+# Dockefile to build Docker Image of Apache WebServer running on AmazonLinux 
+#
+# Made by Denis Astahov ADV-IT  13-March-2019
+#---------------------------------------------------------------------------
+
+FROM amazonlinux
+
+RUN yum -y update
+RUN yum -y install httpd
+
+RUN echo 'Hello World from Docker!' > /var/www/html/index.html
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
+
+EXPOSE 80
+
+  
+#---------------------------------------------------------------------------
+# Dockefile to build Docker Image of Apache WebServer running on Ubuntu
+#
+# Made by Denis Astahov ADV-IT  13-March-2019
+#---------------------------------------------------------------------------
+
+FROM ubuntu:16.04
+
+RUN apt-get -y update
+RUN apt-get -y install apache2
+
+RUN echo 'Hello World from Docker!' > /var/www/html/index.html
+
+
+CMD ["/usr/sbin/apache2ctl", "-D","FOREGROUND"]
+EXPOSE 80

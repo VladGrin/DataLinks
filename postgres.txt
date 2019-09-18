@@ -1,0 +1,3 @@
+CProgram FilesPostgreSQL11binpostgres.exe -D "D:\psqldata"
+
+ssh SuperAdmin@ecsd003002e6.epam.com

@@ -1,0 +1,35 @@
+import boto3, os
+
+def lambda_handler(event, context):
+    myS3 = boto3.client('s3')
+    try:
+        results = myS3.list_buckets()
+        print(results)
+        output = ""
+        for bucket in results['Buckets']:
+            output = output + bucket['Name'] + "<br>"
+        return ("<h1><font color=green>S3 Bucket List:</font></h1><br><br>" + output)
+    except:
+        return ("<h1><font color=red>ERROR!!!</font></h1><br><br>")
+
+
+import boto3, os, time
+
+AWS_DEFAULT_REGION = "eu-west-3"
+os.environ['AWS_DEFAULT_REGION'] = AWS_DEFAULT_REGION
+
+bucketname = "vladgrin." + str(time.time())
+def lambda_handler(event, context):
+    myS3 = boto3.resource('s3')
+    try:
+        results = myS3.create_bucket(
+            Bucket = bucketname,
+            CreateBucketConfiguration={'LocationConstraint':AWS_DEFAULT_REGION}
+            )
+        return ("<h1><font color=green>S3Bucket created Successfully:</font></h1><br><br>" + str(results))
+    except:
+        return ("<h1><font color=red>ERROR!!!</font></h1><br><br>")
+
+aws lambda invoke --function-name=MyLambda-ListS3Backets --region=eu-west-3 output.txt
+aws lambda invoke --function-name=MyLambda-CreateS3Bucket --region=eu-west-3 output.txt
+curl -X POST -H "x-api-key: 2n8ZkrpuPc2GSEpNLcbhV5232QE3lzhj4uik3RnG" https://0usgpxb11d.execute-api.eu-west-3.amazonaws.com/Prod
