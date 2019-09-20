@@ -1,6 +1,7 @@
-RDS - Relation Database
+RDS - Relation Database (Amazon Aurora, MySQL, MariaDB, PostgreSQL, ORACLE, Microsoft SQL Server)
 
 Public or Private Endpoint 	- URL базы данных с/без интернет доступа
 Read Replica			- создаЄт дополнительный интерфейс только дл€ чтени€
-Backup Snapshots Automatic
-Backup Snapshots Manua
+Backup Snapshots Automatic	- стираетс€ при удалении RDS Instance 
+Backup Snapshots Manual		- не стираетс€
+Multi-AZ			- создание доп синханизированного instance в другой AZ дл€ Fail Tolerance (отказоустойчивости failover)
