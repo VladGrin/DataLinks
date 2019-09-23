@@ -1,0 +1,5 @@
+
+http://www.tutorialspoint.com/jdbc/index.htm
+http://tutorials.jenkov.com/jdbc/index.html
+https://www.codejava.net/java-se/jdbc
+https://www.javatpoint.com/java-jdbc

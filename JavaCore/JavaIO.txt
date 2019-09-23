@@ -1,0 +1,6 @@
+
+https://metanit.com/java/tutorial/6.1.php
+http://www.tutorialspoint.com/java/java_files_io.htm
+http://tutorials.jenkov.com/java-io/index.html
+https://www.codejava.net/java-se/file-io
+https://www.javatpoint.com/java-io

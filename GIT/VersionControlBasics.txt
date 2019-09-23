@@ -1,0 +1,6 @@
+
+https://courses.epam.com/courses/course-v1:EPAM+VCG+1/about
+https://www.youtube.com/watch?v=wndbuNcfhWM&list=PLVKSU8yHkskF5LT1cNTdGXINtOrxAxjjV&index=25   	-  Do it.
+http://git-scm.com/book/ru/v1         								- исчерпывающая книга по Git. 
+https://learngitbranching.js.org/    						 		- крутой интерактивный курс по Git.
+

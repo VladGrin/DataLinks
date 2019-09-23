@@ -1,0 +1,8 @@
+
+https://metanit.com/java/tutorial/
+http://www.tutorialspoint.com/java/java_collections.htm
+http://tutorials.jenkov.com/java-collections/overview.html
+http://www.tutorialspoint.com/java/java_collections.htm
+https://www.codejava.net/java-core/collections/java-collections-framework-summary-table
+https://en.wikiversity.org/wiki/Java_Collections_Overview
+https://www.javatpoint.com/collections-in-java

@@ -1,0 +1,6 @@
+
+
+https://stepik.org/lesson/12774/step/1?course=Java-%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B9-%D0%BA%D1%83%D1%80%D1%81&unit=3122
+http://tutorials.jenkov.com/java-logging/index.html
+http://www.tutorialspoint.com/log4j/index.htm
+http://www.tutorialspoint.com/slf4j/index.htm

@@ -1,9 +1,10 @@
 aws ssm get-parameters --name <name> --region <region>
-
 aws ssm get-parameters --name <name> --region <region> --output text
-
 aws ssm get-parameters --name <name> --region <region> --output text --query Parameters[].Value
-
 export DBENDPOINT=`aws ssm get-parameters --name <name> --region <region> --output text --query Parameters[].Value`
 
-aws ssm get-parameters --name DBEndpoint --region eu-west-3
+export DBENDPOINT=`aws ssm get-parameters --name DBEndpoint --region eu-west-3 --output text --query Parameters[].Value`
+export DBUSERNAME=`aws ssm get-parameters --name DBUsername --region eu-west-3 --output text --query Parameters[].Value`
+export DBPASSWORD=`aws ssm get-parameters --name DBPassword --region eu-west-3 --with-decryption --output text --query Parameters[].Value`
+
+env | grep DB

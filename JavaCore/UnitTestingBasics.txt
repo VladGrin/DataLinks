@@ -1,0 +1,7 @@
+
+https://howtodoinjava.com/best-practices/first-principles-for-good-tests/
+https://howtodoinjava.com/best-practices/unit-testing-best-practices-junit-reference-guide/
+https://docs.microsoft.com/en-US/dotnet/core/testing/unit-testing-best-practices
+http://www.tutorialspoint.com/junit/index.htm
+http://tutorials.jenkov.com/java-unit-testing/index.html
+https://www.codejava.net/testing
