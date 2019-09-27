@@ -3,6 +3,7 @@ docker version
 docker images
 docker ps -a
 docker ps -al
+docker container ls
 
 docker pull tomcat
 docker run -p 4000:8080 tomcat
@@ -14,6 +15,13 @@ docker build --tag=<name> .
 docker login -u <login> -p <poassword>
 docker tag <name> vladgrin/<namerepo:v.1>
 docker push vladgrin/<namerepo:v.1>
+
+docker inspect <containerId> 
+
+		Debian Linux
+docker run debian echo "Hello World"
+docker run -i -t debian /bin/bash
+docker run -h CONTAINER -i -t debian /bin/bash 
 
 		Amazon
 

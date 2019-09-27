@@ -1,3 +1,14 @@
+Lambda - сервис позволяющий запускать программный код без ваших таковых 
+работающих серверов. Ваш код запускается и бежит на компьютерах "эластичной мощности" 
+то есть сервис сам делает AutoScaling в зависимости от нагрузки.
+Lambda понимает код на Node.js, Java, C#, Python
+Запускать функции Lambda можно с помощью:
+AWS Management Console
+AWS CLI
+API Gateway
+Events: S3 bucket data change, DynamoDB update 
+
+
 import boto3, os
 
 def lambda_handler(event, context):
@@ -7,10 +18,10 @@ def lambda_handler(event, context):
         print(results)
         output = ""
         for bucket in results['Buckets']:
-            output = output + bucket['Name'] + "<br>"
-        return ("<h1><font color=green>S3 Bucket List:</font></h1><br><br>" + output)
+            output = output + bucket['Name'] + "   "
+        return ("S3 Bucket List:" + output)
     except:
-        return ("<h1><font color=red>ERROR!!!</font></h1><br><br>")
+        return ("ERROR!!!")
 
 
 import boto3, os, time
@@ -26,9 +37,9 @@ def lambda_handler(event, context):
             Bucket = bucketname,
             CreateBucketConfiguration={'LocationConstraint':AWS_DEFAULT_REGION}
             )
-        return ("<h1><font color=green>S3Bucket created Successfully:</font></h1><br><br>" + str(results))
+        return ("S3Bucket created Successfully:" + str(results))
     except:
-        return ("<h1><font color=red>ERROR!!!</font></h1><br><br>")
+        return ("ERROR!!!")
 
 aws lambda invoke --function-name=MyLambda-ListS3Backets --region=eu-west-3 output.txt
 aws lambda invoke --function-name=MyLambda-CreateS3Bucket --region=eu-west-3 output.txt
