@@ -1,0 +1,28 @@
+	https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc
+
+The Dispatcher Servlet
+	http://javastudy.ru/spring-mvc/spring-mvc-basic/
+
+Implementing Controllers
+
+Handler mappings
+
+Resolving views
+
+Building URIs	
+
+Using locales
+
+Using themes
+
+Spring’s multipart (file upload) support
+
+Handling exceptions
+
+Web Security
+
+Convention over configuration support
+
+HTTP caching support
+
+Configuring Spring MVC
