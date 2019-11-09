@@ -1,0 +1,24 @@
+// download apache zookeeper 3.5.5
+// Index of /dist/zookeeper/zookeeper-3.5.5
+// apache-zookeeper-3.5.5-bin.tar.gz        2019-09-21 15:32   10M
+
+wget https://www.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz
+
+// Распаковка
+
+tar -xvzf apache-zookeeper-3.5.5-bin.tar.gz
+
+// удаление
+rm -r apache-zookeeper-3.5.5-bin/
+
+// Установка
+cd apache-zookeeper-3.5.5-bin/
+cd conf/
+cp zoo_sample.cfg zoo.cfg
+cd ../bin/
+
+// запуск
+./zkServer.sh start-foreground
+
+// стоп
+Ctrl + c

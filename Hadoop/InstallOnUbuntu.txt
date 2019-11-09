@@ -1,0 +1,54 @@
+yum install nano   			- текстовый редактор nano
+sudo yum install epel-release -y	- Обновляем систему до последнего стабильного состояния
+sudo yum update -y
+
+sudo yum install -y java-1.8.0-openjdk	- Устанавливаем OpenJDK 8 JRE
+
+Загружаем архив Hadoop:
+sudo wget http://apache.ip-connect.vn.ua/hadoop/common/hadoop-2.7.5/hadoop-2.7.5.tar.gz
+sudo wget http://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz
+
+Загружаем файл контрольной суммы
+sudo wget https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.7.5/hadoop-2.7.5.tar.gz.mds
+sudo wget https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz.mds
+
+Устанавливаем инструмент контрольной суммы:
+sudo yum install perl-Digest-SHA
+
+Вычисляем значение SHA256 архива Hadoop:
+shasum -a 256 hadoop-2.7.5.tar.gz
+shasum -a 256 hadoop-2.6.0.tar.gz
+
+Отображаем содержимое файла hadoop-2.7.5.tar.gz.mds чтобы убедиться, что оба значения SHA256 идентичны:
+cat hadoop-2.7.5.tar.gz.mds
+cat hadoop-2.6.0.tar.gz.mds
+
+Извлекаем архив в каталог opt:
+sudo tar -zxvf hadoop-2.7.5.tar.gz -C /opt
+sudo tar -zxvf hadoop-2.6.0.tar.gz -C /opt
+
+Указываем для Hadoop исходное местоположение Java.
+sudo nano /opt/hadoop-2.7.5/etc/hadoop/hadoop-env.sh
+sudo nano /opt/hadoop-2.6.0/etc/hadoop/hadoop-env.sh
+export JAVA_HOME=${JAVA_HOME}    меняем на        export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+
+Добавляем путь к Hadoop к PATH переменной окружения.
+echo "export PATH=/opt/hadoop-2.7.5/bin:$PATH" | sudo tee -a /etc/profile
+echo "export PATH=/opt/hadoop-2.6.0/bin:$PATH" | sudo tee -a /etc/profile
+source /etc/profile
+
+При помощи встроенного примера Проверяем установки Hadoop.
+Подготавливаем источник данных.
+mkdir ~/source
+cp /opt/hadoop-2.7.5/etc/hadoop/*.xml ~/source
+cp /opt/hadoop-2.6.0/etc/hadoop/*.xml ~/source
+hadoop jar /opt/hadoop-2.7.5/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.5.jar grep ~/source ~/output 'principal[.]*'
+hadoop jar /opt/hadoop-2.6.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar grep ~/source ~/output 'principal[.]*'
+hadoop jar /opt/hadoop-2.6.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar grep ~/source ~/output 'dfs[a-z.]+'
+
+cat ~/output/*
+
+https://uh.ua/kb/vps/software-installation/hadoop.html
+https://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-common/SingleCluster.html
+
+sudo chmod 777 hadoop-2.6.0
